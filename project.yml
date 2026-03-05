@@ -1,6 +1,5 @@
 # XcodeGen project specification for CallRec
-# Generate: xcodegen generate
-# Requires: brew install xcodegen
+# Generate: /tmp/xcodegen/bin/xcodegen generate
 
 name: CallRec
 options:
@@ -24,8 +23,13 @@ targets:
       - path: CallRecApp
         excludes:
           - "Resources/CallRec.driver"
-    resources:
-      - path: CallRecApp/Resources/Info.plist
+      # C helper sources compiled into the app
+      - path: Common/SharedMemoryHelpers.c
+        buildPhase: sources
+      - path: Common/SharedMemoryHelpers.h
+        buildPhase: headers
+      - path: Common/AudioConstants.h
+        buildPhase: headers
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.callrec.app
@@ -35,16 +39,14 @@ targets:
         MACOSX_DEPLOYMENT_TARGET: "14.4"
         SWIFT_VERSION: "5.9"
         LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
-        # Enable App Sandbox is OFF (needed for shm_open, Accessibility API)
+        # App Sandbox OFF (needed for shm_open, Accessibility API)
         ENABLE_APP_SANDBOX: NO
-        # Link frameworks
         OTHER_LDFLAGS:
           - "-framework CoreAudio"
           - "-framework AudioToolbox"
           - "-framework AVFoundation"
           - "-framework ApplicationServices"
           - "-framework Accelerate"
-        # Include Common headers for bridging header
         HEADER_SEARCH_PATHS:
           - "$(SRCROOT)/Common"
       configs:
@@ -79,17 +81,17 @@ targets:
         PRODUCT_NAME: CallRec
         CLANG_CXX_LANGUAGE_STANDARD: "c++17"
         MACOSX_DEPLOYMENT_TARGET: "14.4"
-        # libASPL headers (vendored)
         HEADER_SEARCH_PATHS:
           - "$(SRCROOT)/Dependencies/libASPL/include"
           - "$(SRCROOT)/Common"
+        # Link against the pre-built libASPL static library
         LIBRARY_SEARCH_PATHS:
-          - "$(SRCROOT)/Dependencies/libASPL/lib"
+          - "$(SRCROOT)/build/libASPL"
         OTHER_LDFLAGS:
           - "-framework CoreAudio"
           - "-framework CoreFoundation"
+          - "-framework AudioToolbox"
           - "-lASPL"
-        # Install location
         INSTALL_PATH: "/Library/Audio/Plug-Ins/HAL"
         SKIP_INSTALL: NO
 

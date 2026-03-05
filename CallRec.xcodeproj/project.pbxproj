@@ -1,0 +1,721 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08226EBCD90A50FE14940120 /* SmartRouter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C75D72E7649DB94D62B184F6 /* SmartRouter.cpp */; };
+		0A608400F89383A3392684AE /* PluginEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA84CFF922650BBB69E16DB0 /* PluginEntry.cpp */; };
+		19556FBC6DB156CF360BB394 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45F8E2B10A726F48BB13D14 /* AppDelegate.swift */; };
+		1FF2E66A5E6B8826C4C25558 /* VoiceMemosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2158DC9ADDE45BE3C9CDA8 /* VoiceMemosController.swift */; };
+		235A3C5A3FD98925A512075B /* Orchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43439BB4E241B52E1EF61F88 /* Orchestrator.swift */; };
+		25388556C55A4C39BDAC591E /* SystemAudioDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF596E2A30770410B781CA /* SystemAudioDeviceManager.swift */; };
+		265303BA34962B71F20C1746 /* AudioMixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C838BD38AFB8B634615BF00 /* AudioMixer.swift */; };
+		272EDFF15E7E203390552CE5 /* BluetoothAudioHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8772F066ED144C25D52103 /* BluetoothAudioHandler.swift */; };
+		329925C609A0520CA2247D3E /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1295441F19D16532E0175E6 /* SetupWizardView.swift */; };
+		3ECFE189CA3FC97AF735F32F /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95C5CE21726A00AE60A668A /* MenuBarView.swift */; };
+		594ED2165426E2F6101AD921 /* SimplyCoreAudio in Frameworks */ = {isa = PBXBuildFile; productRef = D74E7F62092AA9E206C61581 /* SimplyCoreAudio */; };
+		6EFB33FDB03B5EB425FA94E5 /* CallRecApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583439220F557B4684FF9323 /* CallRecApp.swift */; };
+		77237DEB1F974271B214DD2A /* SharedMemoryBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398027FDF279B88089D39C2A /* SharedMemoryBridge.swift */; };
+		9B2EC6F4E6BEB91252D28386 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6267FA215CDBC066321FB698 /* SettingsView.swift */; };
+		C2689A9F96253D7D26EEBADF /* MicCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236BFE562C6F6042DDBBF78 /* MicCaptureManager.swift */; };
+		CB577410AE01A66D487FE6D2 /* SharedMemoryReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67E5E60BC34434910405B6E4 /* SharedMemoryReader.cpp */; };
+		D44A594323BCEBF246E6A556 /* CallDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D65B26E105E705E0B1C383 /* CallDetector.swift */; };
+		D8F7167998401D851345087C /* AudioTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CFC90A23B0DE57B8F74B5 /* AudioTapManager.swift */; };
+		DD12EB856B785A0AB85BBC7D /* SharedMemoryHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1F757009C903CF58F7AD4 /* SharedMemoryHelpers.c */; };
+		DD137F675C3F7791F7EE4679 /* SharedMemoryHelpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1F757009C903CF58F7AD4 /* SharedMemoryHelpers.c */; };
+		F372F1F6CC6BD381D68F16B9 /* CallRecDriver.bundle in Embed Dependencies */ = {isa = PBXBuildFile; fileRef = AC0D034F8AF4B0D1CBBD33C7 /* CallRecDriver.bundle */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		10A6B36802B099B0FA620754 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A57ACE9ECDCB0DD99343DF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D56B315F4DA90BA746A265C4;
+			remoteInfo = CallRecDriver;
+		};
+		9792ECE289B1BB09E6F88ABE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A57ACE9ECDCB0DD99343DF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B393D66537ED280B2A6BFE0C;
+			remoteInfo = CallRec;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		671D28AFC1DA153055DC2432 /* Embed Dependencies */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				F372F1F6CC6BD381D68F16B9 /* CallRecDriver.bundle in Embed Dependencies */,
+			);
+			name = "Embed Dependencies";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1C838BD38AFB8B634615BF00 /* AudioMixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMixer.swift; sourceTree = "<group>"; };
+		2236BFE562C6F6042DDBBF78 /* MicCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicCaptureManager.swift; sourceTree = "<group>"; };
+		2B9275061B09694ADA861813 /* RingBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		38C4D7CE7497191EA1CE39A9 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		398027FDF279B88089D39C2A /* SharedMemoryBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedMemoryBridge.swift; sourceTree = "<group>"; };
+		40FF596E2A30770410B781CA /* SystemAudioDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioDeviceManager.swift; sourceTree = "<group>"; };
+		43439BB4E241B52E1EF61F88 /* Orchestrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orchestrator.swift; sourceTree = "<group>"; };
+		45D65B26E105E705E0B1C383 /* CallDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDetector.swift; sourceTree = "<group>"; };
+		4AA82B8FD1D2AC457ADDCEBD /* SharedMemoryReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SharedMemoryReader.hpp; sourceTree = "<group>"; };
+		565BE9B7398D367FB72DD69B /* AudioConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConstants.h; sourceTree = "<group>"; };
+		583439220F557B4684FF9323 /* CallRecApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallRecApp.swift; sourceTree = "<group>"; };
+		6267FA215CDBC066321FB698 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		67E5E60BC34434910405B6E4 /* SharedMemoryReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SharedMemoryReader.cpp; sourceTree = "<group>"; };
+		8AB1F757009C903CF58F7AD4 /* SharedMemoryHelpers.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SharedMemoryHelpers.c; sourceTree = "<group>"; };
+		8B925603782460201331AC5C /* test_ring_buffer */ = {isa = PBXFileReference; path = test_ring_buffer; sourceTree = "<group>"; };
+		8BE7F2C5525C1F0692CE6DB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		931610FCAE79143CC5F52A8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A181E998F56A22003C10DE27 /* CallRec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallRec.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA84CFF922650BBB69E16DB0 /* PluginEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PluginEntry.cpp; sourceTree = "<group>"; };
+		AC0D034F8AF4B0D1CBBD33C7 /* CallRecDriver.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallRecDriver.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC8772F066ED144C25D52103 /* BluetoothAudioHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothAudioHandler.swift; sourceTree = "<group>"; };
+		B16595989C16034987C8CDF5 /* SharedMemoryHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedMemoryHelpers.h; sourceTree = "<group>"; };
+		B4802CFF7B605669724C7430 /* CallRecTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallRecTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2158DC9ADDE45BE3C9CDA8 /* VoiceMemosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMemosController.swift; sourceTree = "<group>"; };
+		C0ADE279DA4BB022B4DE136F /* CallRec.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CallRec.entitlements; sourceTree = "<group>"; };
+		C4C9179C7D4D86BEA7909AA0 /* SmartRouter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SmartRouter.hpp; sourceTree = "<group>"; };
+		C75D72E7649DB94D62B184F6 /* SmartRouter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SmartRouter.cpp; sourceTree = "<group>"; };
+		D4A1040792E1E08CF731765C /* SharedProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedProtocol.h; sourceTree = "<group>"; };
+		E45F8E2B10A726F48BB13D14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EC8CFC90A23B0DE57B8F74B5 /* AudioTapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTapManager.swift; sourceTree = "<group>"; };
+		F1295441F19D16532E0175E6 /* SetupWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
+		F95C5CE21726A00AE60A668A /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		08B3993105807C833DD65BEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				594ED2165426E2F6101AD921 /* SimplyCoreAudio in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06F70872D659EAC958BBDCF3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8B925603782460201331AC5C /* test_ring_buffer */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		0AA43B6F8BBEAD0BA2CEFD00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C0ADE279DA4BB022B4DE136F /* CallRec.entitlements */,
+				8BE7F2C5525C1F0692CE6DB2 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		461A445B55A600CE149B67AC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				565BE9B7398D367FB72DD69B /* AudioConstants.h */,
+				2B9275061B09694ADA861813 /* RingBuffer.h */,
+				8AB1F757009C903CF58F7AD4 /* SharedMemoryHelpers.c */,
+				B16595989C16034987C8CDF5 /* SharedMemoryHelpers.h */,
+				D4A1040792E1E08CF731765C /* SharedProtocol.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		4C00B4311829CFE5CA9D43DE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1C838BD38AFB8B634615BF00 /* AudioMixer.swift */,
+				EC8CFC90A23B0DE57B8F74B5 /* AudioTapManager.swift */,
+				AC8772F066ED144C25D52103 /* BluetoothAudioHandler.swift */,
+				45D65B26E105E705E0B1C383 /* CallDetector.swift */,
+				2236BFE562C6F6042DDBBF78 /* MicCaptureManager.swift */,
+				43439BB4E241B52E1EF61F88 /* Orchestrator.swift */,
+				398027FDF279B88089D39C2A /* SharedMemoryBridge.swift */,
+				40FF596E2A30770410B781CA /* SystemAudioDeviceManager.swift */,
+				BB2158DC9ADDE45BE3C9CDA8 /* VoiceMemosController.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		4F5E89DF3798DC0D31B9EB24 /* SetupWizard */ = {
+			isa = PBXGroup;
+			children = (
+				F1295441F19D16532E0175E6 /* SetupWizardView.swift */,
+			);
+			path = SetupWizard;
+			sourceTree = "<group>";
+		};
+		90C5ED703A9D237873D4F003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E45F8E2B10A726F48BB13D14 /* AppDelegate.swift */,
+				583439220F557B4684FF9323 /* CallRecApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A180C0AB90E726C5249B581D = {
+			isa = PBXGroup;
+			children = (
+				CD347760A67BD734C95E05E4 /* CallRecApp */,
+				FB9BEB8CE4DB3A557BD9A67E /* CallRecDriver */,
+				461A445B55A600CE149B67AC /* Common */,
+				06F70872D659EAC958BBDCF3 /* Tests */,
+				E833EAE9BC5BF039E868984D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD347760A67BD734C95E05E4 /* CallRecApp */ = {
+			isa = PBXGroup;
+			children = (
+				38C4D7CE7497191EA1CE39A9 /* BridgingHeader.h */,
+				90C5ED703A9D237873D4F003 /* App */,
+				4C00B4311829CFE5CA9D43DE /* Core */,
+				0AA43B6F8BBEAD0BA2CEFD00 /* Resources */,
+				E58FE5F55279BC7A708BD673 /* UI */,
+			);
+			path = CallRecApp;
+			sourceTree = "<group>";
+		};
+		E58FE5F55279BC7A708BD673 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F95C5CE21726A00AE60A668A /* MenuBarView.swift */,
+				6267FA215CDBC066321FB698 /* SettingsView.swift */,
+				4F5E89DF3798DC0D31B9EB24 /* SetupWizard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E833EAE9BC5BF039E868984D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A181E998F56A22003C10DE27 /* CallRec.app */,
+				AC0D034F8AF4B0D1CBBD33C7 /* CallRecDriver.bundle */,
+				B4802CFF7B605669724C7430 /* CallRecTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB9BEB8CE4DB3A557BD9A67E /* CallRecDriver */ = {
+			isa = PBXGroup;
+			children = (
+				931610FCAE79143CC5F52A8E /* Info.plist */,
+				AA84CFF922650BBB69E16DB0 /* PluginEntry.cpp */,
+				67E5E60BC34434910405B6E4 /* SharedMemoryReader.cpp */,
+				4AA82B8FD1D2AC457ADDCEBD /* SharedMemoryReader.hpp */,
+				C75D72E7649DB94D62B184F6 /* SmartRouter.cpp */,
+				C4C9179C7D4D86BEA7909AA0 /* SmartRouter.hpp */,
+			);
+			path = CallRecDriver;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B393D66537ED280B2A6BFE0C /* CallRec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4208427CAF7546A98D174FBB /* Build configuration list for PBXNativeTarget "CallRec" */;
+			buildPhases = (
+				58A79AE5438FCBE3EB5DD94C /* Sources */,
+				08B3993105807C833DD65BEE /* Frameworks */,
+				671D28AFC1DA153055DC2432 /* Embed Dependencies */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F403B72C0AC5C4FFCF7636E /* PBXTargetDependency */,
+			);
+			name = CallRec;
+			packageProductDependencies = (
+				D74E7F62092AA9E206C61581 /* SimplyCoreAudio */,
+			);
+			productName = CallRec;
+			productReference = A181E998F56A22003C10DE27 /* CallRec.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D56B315F4DA90BA746A265C4 /* CallRecDriver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 815BE0D9976D6E24009E7D52 /* Build configuration list for PBXNativeTarget "CallRecDriver" */;
+			buildPhases = (
+				BF887C43AB0563AAE3B42EF2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CallRecDriver;
+			packageProductDependencies = (
+			);
+			productName = CallRecDriver;
+			productReference = AC0D034F8AF4B0D1CBBD33C7 /* CallRecDriver.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D711817F7BF3DC5BB3B7065E /* CallRecTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 02455A0124C83B61CB6AFF54 /* Build configuration list for PBXNativeTarget "CallRecTests" */;
+			buildPhases = (
+				0E3692B3E283981A8126D18E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				018405650A725439797FE909 /* PBXTargetDependency */,
+			);
+			name = CallRecTests;
+			packageProductDependencies = (
+			);
+			productName = CallRecTests;
+			productReference = B4802CFF7B605669724C7430 /* CallRecTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A57ACE9ECDCB0DD99343DF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 0CE1EB86D3987436A91AFFCB /* Build configuration list for PBXProject "CallRec" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A180C0AB90E726C5249B581D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6F4C30F3AF8D42EF1D503B68 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B393D66537ED280B2A6BFE0C /* CallRec */,
+				D56B315F4DA90BA746A265C4 /* CallRecDriver */,
+				D711817F7BF3DC5BB3B7065E /* CallRecTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E3692B3E283981A8126D18E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58A79AE5438FCBE3EB5DD94C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19556FBC6DB156CF360BB394 /* AppDelegate.swift in Sources */,
+				265303BA34962B71F20C1746 /* AudioMixer.swift in Sources */,
+				D8F7167998401D851345087C /* AudioTapManager.swift in Sources */,
+				272EDFF15E7E203390552CE5 /* BluetoothAudioHandler.swift in Sources */,
+				D44A594323BCEBF246E6A556 /* CallDetector.swift in Sources */,
+				6EFB33FDB03B5EB425FA94E5 /* CallRecApp.swift in Sources */,
+				3ECFE189CA3FC97AF735F32F /* MenuBarView.swift in Sources */,
+				C2689A9F96253D7D26EEBADF /* MicCaptureManager.swift in Sources */,
+				235A3C5A3FD98925A512075B /* Orchestrator.swift in Sources */,
+				9B2EC6F4E6BEB91252D28386 /* SettingsView.swift in Sources */,
+				329925C609A0520CA2247D3E /* SetupWizardView.swift in Sources */,
+				77237DEB1F974271B214DD2A /* SharedMemoryBridge.swift in Sources */,
+				DD12EB856B785A0AB85BBC7D /* SharedMemoryHelpers.c in Sources */,
+				25388556C55A4C39BDAC591E /* SystemAudioDeviceManager.swift in Sources */,
+				1FF2E66A5E6B8826C4C25558 /* VoiceMemosController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF887C43AB0563AAE3B42EF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A608400F89383A3392684AE /* PluginEntry.cpp in Sources */,
+				DD137F675C3F7791F7EE4679 /* SharedMemoryHelpers.c in Sources */,
+				CB577410AE01A66D487FE6D2 /* SharedMemoryReader.cpp in Sources */,
+				08226EBCD90A50FE14940120 /* SmartRouter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		018405650A725439797FE909 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B393D66537ED280B2A6BFE0C /* CallRec */;
+			targetProxy = 9792ECE289B1BB09E6F88ABE /* PBXContainerItemProxy */;
+		};
+		5F403B72C0AC5C4FFCF7636E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D56B315F4DA90BA746A265C4 /* CallRecDriver */;
+			targetProxy = 10A6B36802B099B0FA620754 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		005832815D65CFE8533B81F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Dependencies/libASPL/include",
+					"$(SRCROOT)/Common",
+				);
+				INFOPLIST_FILE = CallRecDriver/Info.plist;
+				INSTALL_PATH = "/Library/Audio/Plug-Ins/HAL";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/build/libASPL",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				OTHER_LDFLAGS = (
+					"-framework CoreAudio",
+					"-framework CoreFoundation",
+					"-framework AudioToolbox",
+					"-lASPL",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.callrec.driver;
+				PRODUCT_NAME = CallRec;
+				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = driver;
+			};
+			name = Release;
+		};
+		00D659CECC0CC3A174A109DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		282853F95E0FC55BFAD4F6A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Common",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.callrec.tests;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = CallRecApp/BridgingHeader.h;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CallRec.app/Contents/MacOS/CallRec";
+			};
+			name = Debug;
+		};
+		4703AD265F708E44E1E4694A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CallRecApp/Resources/CallRec.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Common",
+				);
+				INFOPLIST_FILE = CallRecApp/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				OTHER_LDFLAGS = (
+					"-framework CoreAudio",
+					"-framework AudioToolbox",
+					"-framework AVFoundation",
+					"-framework ApplicationServices",
+					"-framework Accelerate",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.callrec.app;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = CallRecApp/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		70999F35BD4F6AE4666C8D49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Common",
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.callrec.tests;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = CallRecApp/BridgingHeader.h;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CallRec.app/Contents/MacOS/CallRec";
+			};
+			name = Release;
+		};
+		C9E524B8B124DB1DF66228A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CallRecApp/Resources/CallRec.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_APP_SANDBOX = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Common",
+				);
+				INFOPLIST_FILE = CallRecApp/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				OTHER_LDFLAGS = (
+					"-framework CoreAudio",
+					"-framework AudioToolbox",
+					"-framework AVFoundation",
+					"-framework ApplicationServices",
+					"-framework Accelerate",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.callrec.app;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = CallRecApp/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		D983F67C8E5DFAF5E2D3CCDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Dependencies/libASPL/include",
+					"$(SRCROOT)/Common",
+				);
+				INFOPLIST_FILE = CallRecDriver/Info.plist;
+				INSTALL_PATH = "/Library/Audio/Plug-Ins/HAL";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/build/libASPL",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				OTHER_LDFLAGS = (
+					"-framework CoreAudio",
+					"-framework CoreFoundation",
+					"-framework AudioToolbox",
+					"-lASPL",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.callrec.driver;
+				PRODUCT_NAME = CallRec;
+				SDKROOT = macosx;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = driver;
+			};
+			name = Debug;
+		};
+		EEFF4D4D73D91E65FA2C0D37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02455A0124C83B61CB6AFF54 /* Build configuration list for PBXNativeTarget "CallRecTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				282853F95E0FC55BFAD4F6A2 /* Debug */,
+				70999F35BD4F6AE4666C8D49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		0CE1EB86D3987436A91AFFCB /* Build configuration list for PBXProject "CallRec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00D659CECC0CC3A174A109DF /* Debug */,
+				EEFF4D4D73D91E65FA2C0D37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4208427CAF7546A98D174FBB /* Build configuration list for PBXNativeTarget "CallRec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9E524B8B124DB1DF66228A4 /* Debug */,
+				4703AD265F708E44E1E4694A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		815BE0D9976D6E24009E7D52 /* Build configuration list for PBXNativeTarget "CallRecDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D983F67C8E5DFAF5E2D3CCDC /* Debug */,
+				005832815D65CFE8533B81F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6F4C30F3AF8D42EF1D503B68 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rnine/SimplyCoreAudio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D74E7F62092AA9E206C61581 /* SimplyCoreAudio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F4C30F3AF8D42EF1D503B68 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */;
+			productName = SimplyCoreAudio;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0A57ACE9ECDCB0DD99343DF8 /* Project object */;
+}
