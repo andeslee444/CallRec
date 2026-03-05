@@ -94,6 +94,10 @@ if [ "$APP_ONLY" = false ]; then
     # Copy Info.plist
     cp "$ROOT/CallRecDriver/Info.plist" "$DRIVER_CONTENTS/Info.plist"
 
+    # Ad-hoc sign the driver bundle
+    echo "  Signing driver bundle"
+    codesign --force --sign - "$DRIVER_BUNDLE" 2>/dev/null
+
     echo "  Driver: $DRIVER_BUNDLE ($(du -sh "$DRIVER_BUNDLE" | awk '{print $1}'))"
     echo ""
 fi
@@ -196,6 +200,13 @@ PLIST
         echo "  Embedding CallRec.driver in app bundle"
         cp -R "$DIST/CallRec.driver" "$APP_RESOURCES/CallRec.driver"
     fi
+
+    # Ad-hoc sign the app bundle (sign embedded items first)
+    echo "  Signing app bundle"
+    if [ -d "$APP_RESOURCES/CallRec.driver" ]; then
+        codesign --force --sign - "$APP_RESOURCES/CallRec.driver" 2>/dev/null
+    fi
+    codesign --force --sign - "$APP_BUNDLE" 2>/dev/null
 
     echo "  App: $APP_BUNDLE ($(du -sh "$APP_BUNDLE" | awk '{print $1}'))"
     echo ""
