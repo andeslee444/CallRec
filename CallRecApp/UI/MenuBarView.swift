@@ -3,6 +3,7 @@
 
 import SwiftUI
 
+@available(macOS 14.2, *)
 struct MenuBarView: View {
     @ObservedObject var orchestrator: Orchestrator
     @Environment(\.openWindow) private var openWindow

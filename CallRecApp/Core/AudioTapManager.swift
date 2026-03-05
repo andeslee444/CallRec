@@ -13,6 +13,7 @@ import AudioToolbox
 /// Callback delivering captured audio frames.
 typealias AudioTapCallback = (_ frames: UnsafePointer<Float>, _ frameCount: UInt32, _ sampleRate: Float64) -> Void
 
+@available(macOS 14.2, *)
 final class AudioTapManager {
 
     // MARK: - Properties

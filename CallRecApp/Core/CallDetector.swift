@@ -23,6 +23,7 @@ enum CallState: Equatable {
 
 // MARK: - Call Detector
 
+@available(macOS 14.2, *)
 final class CallDetector {
 
     // MARK: - Configuration

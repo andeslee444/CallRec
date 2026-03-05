@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+@available(macOS 14.2, *)
 struct SettingsView: View {
     @ObservedObject var orchestrator: Orchestrator
 

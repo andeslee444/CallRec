@@ -31,6 +31,7 @@ enum OrchestratorState: String, CustomStringConvertible {
 
 // MARK: - Orchestrator
 
+@available(macOS 14.2, *)
 @MainActor
 final class Orchestrator: ObservableObject {
 

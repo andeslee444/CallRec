@@ -63,7 +63,7 @@ void InitializeDriver()
     streamParams.Latency = 0;
 
     auto stream = std::make_shared<aspl::Stream>(context, device, streamParams);
-    device->AddStream(stream);
+    device->AddStreamAsync(stream);
 
     // Attach our SmartRouter as the IO handler for per-client routing
     auto router = std::make_shared<CallRec::SmartRouter>();

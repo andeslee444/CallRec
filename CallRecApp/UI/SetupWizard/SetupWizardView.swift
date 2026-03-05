@@ -13,6 +13,7 @@
 import SwiftUI
 import AVFoundation
 
+@available(macOS 14.2, *)
 struct SetupWizardView: View {
     @ObservedObject var orchestrator: Orchestrator
     @State private var currentStep = 0

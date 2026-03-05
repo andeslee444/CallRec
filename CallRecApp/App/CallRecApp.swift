@@ -2,6 +2,7 @@
 
 import SwiftUI
 
+@available(macOS 14.2, *)
 @main
 struct CallRecApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

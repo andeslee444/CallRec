@@ -1,30 +1,78 @@
-// Minimal libASPL Client stub
+// Copyright (c) libASPL authors
+// Licensed under MIT
+
+//! @file aspl/Client.hpp
+//! @brief Client.
+
 #pragma once
 
-#include <memory>
+#include <CoreFoundation/CoreFoundation.h>
+
 #include <string>
-#include <CoreAudio/AudioServerPlugIn.h>
+
+#include <unistd.h>
 
 namespace aspl {
 
-class Client : public std::enable_shared_from_this<Client> {
+//! Information about client.
+struct ClientInfo
+{
+    //! Client identifier.
+    //! Allows for differentiating multiple clients in the same process.
+    UInt32 ClientID = 0;
+
+    //! Client PID.
+    //! The pid_t of the process that contains the client.
+    pid_t ProcessID = 0;
+
+    //! Client endianness.
+    //! Indicating whether or not the client has the same endianness as the server.
+    bool IsNativeEndian = false;
+
+    //! Client bundle.
+    //! Bundle ID of the main bundle of the process that contains the client.
+    std::string BundleID = "";
+};
+
+//! Device client.
+//!
+//! Represents connection between an app and device. Typically an app has at most
+//! one client, but this is not a requirement.
+//!
+//! Devices asks RequestHandler to create Client object when a new client comes
+//! to the devices, and asks to remove it when the client leaves.
+//!
+//! You may subclass Client if you need to keep additional per-client state. To
+//! incorporate your own client class, you'll need to set custom RequestHandler.
+class Client
+{
 public:
-    Client() = default;
+    //! Construct client from ClientInfo.
+    Client(const ClientInfo& clientInfo);
+
+    Client(const Client&) = delete;
+    Client& operator=(const Client&) = delete;
+
     virtual ~Client() = default;
 
-    virtual UInt32 GetClientID() const { return clientID_; }
-    virtual pid_t GetProcessID() const { return processID_; }
-    virtual std::string GetBundleID() const { return bundleID_; }
-    virtual bool GetIsNativeEndian() const { return true; }
+    //! Client identifier.
+    //! Allows for differentiating multiple clients in the same process.
+    UInt32 GetClientID() const;
 
-    void SetClientID(UInt32 id) { clientID_ = id; }
-    void SetProcessID(pid_t pid) { processID_ = pid; }
-    void SetBundleID(const std::string& bid) { bundleID_ = bid; }
+    //! Client PID.
+    //! The pid_t of the process that contains the client.
+    pid_t GetProcessID() const;
+
+    //! Client endianness.
+    //! Indicating whether or not the client has the same endianness as the server.
+    bool GetIsNativeEndian() const;
+
+    //! Client bundle.
+    //! Bundle ID of the main bundle of the process that contains the client.
+    std::string GetBundleID() const;
 
 private:
-    UInt32 clientID_ = 0;
-    pid_t processID_ = 0;
-    std::string bundleID_;
+    const ClientInfo info_;
 };
 
 } // namespace aspl
