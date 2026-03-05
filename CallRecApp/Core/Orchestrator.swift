@@ -42,6 +42,9 @@ final class Orchestrator: ObservableObject {
     @Published private(set) var micLevel: Float = 0
     @Published private(set) var callLevel: Float = 0
     @Published private(set) var activeCallApp: String?
+    @Published private(set) var detectedCallApps: Set<String> = []
+    @Published private(set) var appActivityLevels: [String: Double] = [:]
+    @Published private(set) var isMicInUse: Bool = false
     @Published private(set) var lastError: String?
 
     // MARK: - Subsystems
@@ -82,6 +85,9 @@ final class Orchestrator: ObservableObject {
     func start() {
         guard state == .idle else { return }
 
+        // Clear any stale error from previous session
+        lastError = nil
+
         // Clean up any stale shared memory from previous crash
         SharedMemoryBridge.cleanupStale()
 
@@ -114,7 +120,31 @@ final class Orchestrator: ObservableObject {
                 self?.handleCallStateChange(callState)
             }
         }
+
+        callDetector.onDetectedAppsChange = { [weak self] apps in
+            Task { @MainActor in
+                self?.detectedCallApps = apps
+                // Clean up activity levels for apps that are no longer detected
+                self?.appActivityLevels = self?.appActivityLevels.filter { apps.contains($0.key) } ?? [:]
+            }
+        }
+
+        callDetector.onAudioActivity = { [weak self] bundleID, level in
+            Task { @MainActor in
+                self?.appActivityLevels[bundleID] = level
+            }
+        }
+
+        callDetector.onMicActivityChange = { [weak self] active in
+            Task { @MainActor in
+                self?.isMicInUse = active
+            }
+        }
     }
+
+    /// Cooldown after a failed recording attempt to avoid rapid retries.
+    private var lastRecordingFailure: Date?
+    private let recordingRetryCooldown: TimeInterval = 30.0
 
     private func handleCallStateChange(_ callState: CallState) {
         switch callState {
@@ -124,16 +154,20 @@ final class Orchestrator: ObservableObject {
                 Task { await stopRecording() }
             }
 
-        case .appRunning(let bundleID, _):
-            activeCallApp = bundleID
+        case .appRunning:
+            activeCallApp = nil  // No active call — just app running
             if state == .recording {
-                // Call ended but app still running — stop recording
                 Task { await stopRecording() }
             }
 
         case .callActive(let bundleID, let pid):
             activeCallApp = bundleID
             if state == .monitoring {
+                // Don't retry immediately after a failure
+                if let lastFail = lastRecordingFailure,
+                   Date().timeIntervalSince(lastFail) < recordingRetryCooldown {
+                    return
+                }
                 Task { await startRecording(bundleID: bundleID, pid: pid) }
             }
 
@@ -227,12 +261,13 @@ final class Orchestrator: ObservableObject {
 
         } catch {
             lastError = error.localizedDescription
-            state = .error
+            lastRecordingFailure = Date()
+            activeCallApp = nil
 
             // Clean up partial setup
             await tearDown()
 
-            // Try to recover back to monitoring
+            // Recover back to monitoring
             state = .monitoring
         }
     }

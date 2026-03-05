@@ -1,32 +1,50 @@
 // AppDelegate — Lifecycle management, login item, driver install checks.
 
 import AppKit
+import SwiftUI
 import ServiceManagement
 
+@available(macOS 14.2, *)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
+    var window: NSWindow?
+    var orchestrator: Orchestrator?
+
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Hide dock icon (menubar-only app)
-        NSApp.setActivationPolicy(.accessory)
+        // Show as regular app (visible in Dock)
+        NSApp.setActivationPolicy(.regular)
 
         // Clean up stale shared memory from previous crash
         SharedMemoryBridge.cleanupStale()
 
-        // Check if setup has been completed
-        let setupComplete = UserDefaults.standard.bool(forKey: "callrec.setupComplete")
-        if !setupComplete {
-            // Open setup wizard on first launch
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                if let window = NSApp.windows.first(where: { $0.title == "CallRec Setup" }) {
-                    window.makeKeyAndOrderFront(nil)
-                    NSApp.activate(ignoringOtherApps: true)
-                }
-            }
+        // Create orchestrator and window directly
+        let orch = Orchestrator()
+        self.orchestrator = orch
+
+        let contentView = MainWindowView(orchestrator: orch)
+        let hostingController = NSHostingController(rootView: contentView)
+
+        let win = NSWindow(contentViewController: hostingController)
+        win.title = "CallRec"
+        win.styleMask = [.titled, .closable, .miniaturizable]
+        win.setContentSize(NSSize(width: 400, height: 340))
+        win.center()
+        win.makeKeyAndOrderFront(nil)
+        self.window = win
+
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        // Re-show window when clicking Dock icon
+        if !flag {
+            window?.makeKeyAndOrderFront(nil)
         }
+        NSApp.activate(ignoringOtherApps: true)
+        return true
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        // Ensure we clean up shared memory and restore audio device on quit
         SharedMemoryBridge.cleanupStale()
     }
 
@@ -56,8 +74,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
     }
 
-    /// Install the audio driver to /Library/Audio/Plug-Ins/HAL/
-    /// Requires admin privileges via AuthorizationCreate.
     static func installDriver() async throws {
         guard let bundledDriver = Bundle.main.path(
             forResource: "CallRec",
@@ -69,9 +85,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let destination = "/Library/Audio/Plug-Ins/HAL/CallRec.driver"
 
-        // Use osascript to run with admin privileges
         let script = """
-        do shell script "rm -rf '\(destination)' && cp -R '\(bundledDriver)' '\(destination)' && launchctl kickstart -k system/com.apple.audio.coreaudiod" with administrator privileges
+        do shell script "rm -rf '\(destination)' && cp -R '\(bundledDriver)' '\(destination)' && killall coreaudiod" with administrator privileges
         """
 
         var error: NSDictionary?
@@ -86,7 +101,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             )
         }
 
-        // Wait for coreaudiod to restart and load the driver
         try await Task.sleep(for: .seconds(3))
     }
 }

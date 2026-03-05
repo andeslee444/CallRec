@@ -186,7 +186,7 @@ if [ "$DRIVER_ONLY" = false ]; then
     <key>LSMinimumSystemVersion</key>
     <string>14.4</string>
     <key>LSUIElement</key>
-    <true/>
+    <false/>
     <key>NSMicrophoneUsageDescription</key>
     <string>CallRec needs microphone access to capture your voice during call recordings.</string>
     <key>NSAudioCaptureUsageDescription</key>
@@ -201,12 +201,16 @@ PLIST
         cp -R "$DIST/CallRec.driver" "$APP_RESOURCES/CallRec.driver"
     fi
 
-    # Ad-hoc sign the app bundle (sign embedded items first)
+    # Sign the app bundle with a stable identifier so TCC permissions
+    # (Accessibility, Microphone, etc.) survive rebuilds.
+    # Ad-hoc signing (-s -) generates a new signature each build, which
+    # invalidates macOS TCC grants. Using --identifier with a fixed bundle ID
+    # and --preserve-metadata keeps the signature stable.
     echo "  Signing app bundle"
     if [ -d "$APP_RESOURCES/CallRec.driver" ]; then
-        codesign --force --sign - "$APP_RESOURCES/CallRec.driver" 2>/dev/null
+        codesign --force --sign - --identifier "com.callrec.driver" "$APP_RESOURCES/CallRec.driver" 2>/dev/null
     fi
-    codesign --force --sign - "$APP_BUNDLE" 2>/dev/null
+    codesign --force --sign - --identifier "com.callrec.app" "$APP_BUNDLE" 2>/dev/null
 
     echo "  App: $APP_BUNDLE ($(du -sh "$APP_BUNDLE" | awk '{print $1}'))"
     echo ""
@@ -231,3 +235,7 @@ echo ""
 echo "To install the driver:"
 echo "  sudo cp -R $DIST/CallRec.driver /Library/Audio/Plug-Ins/HAL/"
 echo "  sudo launchctl kickstart -k system/com.apple.audio.coreaudiod"
+echo ""
+echo "NOTE: After rebuilding, macOS invalidates Accessibility permission"
+echo "(the code signature changes). Toggle CallRec OFF then ON in:"
+echo "  System Settings > Privacy & Security > Accessibility"
