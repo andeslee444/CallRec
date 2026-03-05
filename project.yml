@@ -1,0 +1,128 @@
+# XcodeGen project specification for CallRec
+# Generate: xcodegen generate
+# Requires: brew install xcodegen
+
+name: CallRec
+options:
+  bundleIdPrefix: com.callrec
+  deploymentTarget:
+    macOS: "14.4"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+
+packages:
+  SimplyCoreAudio:
+    url: https://github.com/rnine/SimplyCoreAudio.git
+    from: "4.0.0"
+
+targets:
+  # ─── Main App ─────────────────────────────────────
+  CallRec:
+    type: application
+    platform: macOS
+    sources:
+      - path: CallRecApp
+        excludes:
+          - "Resources/CallRec.driver"
+    resources:
+      - path: CallRecApp/Resources/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callrec.app
+        INFOPLIST_FILE: CallRecApp/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: CallRecApp/Resources/CallRec.entitlements
+        SWIFT_OBJC_BRIDGING_HEADER: CallRecApp/BridgingHeader.h
+        MACOSX_DEPLOYMENT_TARGET: "14.4"
+        SWIFT_VERSION: "5.9"
+        LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
+        # Enable App Sandbox is OFF (needed for shm_open, Accessibility API)
+        ENABLE_APP_SANDBOX: NO
+        # Link frameworks
+        OTHER_LDFLAGS:
+          - "-framework CoreAudio"
+          - "-framework AudioToolbox"
+          - "-framework AVFoundation"
+          - "-framework ApplicationServices"
+          - "-framework Accelerate"
+        # Include Common headers for bridging header
+        HEADER_SEARCH_PATHS:
+          - "$(SRCROOT)/Common"
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: "-Onone"
+        Release:
+          SWIFT_OPTIMIZATION_LEVEL: "-O"
+    dependencies:
+      - package: SimplyCoreAudio
+      - target: CallRecDriver
+        embed: true
+        codeSign: false
+        copy:
+          destination: resources
+          subpath: ""
+
+  # ─── Audio Driver ─────────────────────────────────
+  CallRecDriver:
+    type: bundle
+    platform: macOS
+    sources:
+      - path: CallRecDriver
+        excludes:
+          - CMakeLists.txt
+      - path: Common
+        headerVisibility: project
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callrec.driver
+        INFOPLIST_FILE: CallRecDriver/Info.plist
+        WRAPPER_EXTENSION: driver
+        PRODUCT_NAME: CallRec
+        CLANG_CXX_LANGUAGE_STANDARD: "c++17"
+        MACOSX_DEPLOYMENT_TARGET: "14.4"
+        # libASPL headers (vendored)
+        HEADER_SEARCH_PATHS:
+          - "$(SRCROOT)/Dependencies/libASPL/include"
+          - "$(SRCROOT)/Common"
+        LIBRARY_SEARCH_PATHS:
+          - "$(SRCROOT)/Dependencies/libASPL/lib"
+        OTHER_LDFLAGS:
+          - "-framework CoreAudio"
+          - "-framework CoreFoundation"
+          - "-lASPL"
+        # Install location
+        INSTALL_PATH: "/Library/Audio/Plug-Ins/HAL"
+        SKIP_INSTALL: NO
+
+  # ─── Tests ────────────────────────────────────────
+  CallRecTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+        excludes:
+          - test_ring_buffer.c
+    dependencies:
+      - target: CallRec
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callrec.tests
+        SWIFT_OBJC_BRIDGING_HEADER: CallRecApp/BridgingHeader.h
+        HEADER_SEARCH_PATHS:
+          - "$(SRCROOT)/Common"
+
+schemes:
+  CallRec:
+    build:
+      targets:
+        CallRec: all
+        CallRecDriver: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - CallRecTests
+    profile:
+      config: Release
+    archive:
+      config: Release

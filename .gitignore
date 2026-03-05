@@ -1,0 +1,22 @@
+# Xcode
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+
+# Dependencies (vendored, but build artifacts ignored)
+Dependencies/libASPL/build/
+
+# Test binaries
+Tests/test_ring_buffer
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# SPM
+.build/
+.swiftpm/
